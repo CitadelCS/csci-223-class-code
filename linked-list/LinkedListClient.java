@@ -1,5 +1,3 @@
-package demo;
-
 import java.util.Iterator;
 
 public class LinkedListClient {
