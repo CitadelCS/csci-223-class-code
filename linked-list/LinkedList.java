@@ -1,5 +1,3 @@
-package demo;
-
 import java.util.Iterator;
 
 public class LinkedList<AnyType> implements Iterable<AnyType> {
