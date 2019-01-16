@@ -4,11 +4,13 @@ import java.util.Iterator;
 
 public class LinkedList<Item> implements Iterable<Item> {
 
+	// here are the instance variables/data fields for the list  
   private int size;
   private Node<Item> first;
 
   // no constructor because default is fine.
 
+	// here are the instance methods for the class
   public boolean isEmpty() {
     return first == null;
   }
@@ -45,24 +47,41 @@ public class LinkedList<Item> implements Iterable<Item> {
 
 
   // ---
-
+  
+	// here's the method we must write to call ourselves Iterable
+	// it's only job is to return an object that knows how to iterate over this
+	// list.
   @Override
   public Iterator<Item> iterator() {
     return new FancyIterator<Item>(first);
   }
 
-  // helper static classes to follow.
+	// here come the inner classes used by the list.
 
-  // this is a node.
+	/*
+	 * we don't need to write a constructor -- the default one is fine. we don't
+	 * need getters/setters since it's a nested class. private means no other
+	 * class can use this Node type static means this inner class can only
+	 * access static members of the list class
+	 */  
   private static class Node<Item> {
     Item item;
     Node<Item> next;
   }
 
-  // this is an iterator class for Items in this linked list.
+	/*
+	 * this class defines an iterator that knows how to traverse this
+	 * collection. an iterator is like an arrow you advance through a collection
+	 * one by one. in our case, our iterator knows that our data items are
+	 * trapped inside of our linked list nodes.
+	 */
   private static class FancyIterator<Item> implements Iterator<Item> {
+		// the only instance variable is the reference to the next node to
+		// process
     private Node<Item> nextNode;
 
+    // the constructor needs a reference to the first node in the list to
+		// set things up.
     public FancyIterator(Node<Item> startNode) {
       nextNode = startNode;
     }
@@ -72,6 +91,7 @@ public class LinkedList<Item> implements Iterable<Item> {
       return nextNode != null;
     }
 
+    // this method is careful to return the item, not the node itself.
     @Override
     public Item next() {
       Node<Item> save = nextNode;
