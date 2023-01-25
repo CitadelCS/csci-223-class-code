@@ -37,9 +37,14 @@ public class LinkedList<Item> implements Iterable<Item> {
   }
 
   // remove from beginning
-  public void remove() {
-    first = first.next;
-    size--;
+  public Item remove(){
+      Item doomed = null;
+      if(!isEmpty()) {
+          doomed = first.item;
+          first = first.next;
+          size--;
+      }
+      return doomed;
   }
 
 
